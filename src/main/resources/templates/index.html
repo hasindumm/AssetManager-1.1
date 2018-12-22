@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Spring Boot Example</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+</div>
+
+<hr>
+<hr>
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            This content is only shown to administrators.
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+            This content is only shown to users.
+        </div>
+
+        <br/>
+
+        <div>
+            User: <span sec:authentication="name">NOT FOUND</span>
+            Spring Roles: <span sec:authentication="principal.authorities">NOT FOUND</span>
+        </div>
+
+        <br/>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+</body>
+</html>
